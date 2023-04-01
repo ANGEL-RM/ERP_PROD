@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Modelo.Properties
+namespace Vista.Properties
 {
 
 
