@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Modelo;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +22,35 @@ namespace Vista
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private String Solicitud()
+        {
+            return "";
+
+        }
+
+        private Respuesta<int> ValidarLogin()
+        {
+            return new DaoAdminUsuario().ValidarLogin(textBox1.Text, textBox2.Text);
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            Task<Respuesta<int>> task = new Task<Respuesta<int>>(ValidarLogin);
+            task.Start();
+            var respuestavalidacion = await task;
+            if (respuestavalidacion.Estado == EstadosDeRespuesta.Correcto)
+            {
+                if (!respuestavalidacion.Datos.Equals(2))
+                {
+                    MessageBox.Show("No valido");
+                }
+                else{
+                    MessageBox.Show("exitoso");
+                }
+            }
+            //string passWord = Encrypt.GetSHA256(textBox2.Text.Trim());
         }
     }
 }

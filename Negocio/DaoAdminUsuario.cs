@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Controlador;
+using Modelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +10,15 @@ namespace Negocio
 {
     public class DaoAdminUsuario
     {
-        public class Ejecucion_Adm_Usuario
+        private AdminUsuarioController controllerAdminUsuario = new AdminUsuarioController();
+
+        public Respuesta<int> ValidarLogin(String Nombre, String Password)
         {
-            private AdminUsuarioController controllerAdminUsuario = new AdminUsuarioController();
-            public List<Tbl_Adm_Usuario> ObtenerUsuarios() => controllerAdminUsuario.ObtenerUsuarios();
+            Tbl_Adm_Usuario usuario = new Tbl_Adm_Usuario();
+            usuario.Nombre = Nombre;
+            usuario.Password = Password;
+            return controllerAdminUsuario.ValidarUsuarioLogin(usuario);
         }
+
     }
 }
