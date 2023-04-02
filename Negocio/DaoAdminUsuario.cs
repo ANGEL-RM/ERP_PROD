@@ -12,7 +12,7 @@ namespace Negocio
     {
         private AdminUsuarioController controllerAdminUsuario = new AdminUsuarioController();
 
-        public Task<Respuesta<int>> ValidarLogin(String Nombre, String Password)
+        public Respuesta<int> ValidarLogin(String Nombre, String Password)
         {
             Tbl_Adm_Usuario usuario = new Tbl_Adm_Usuario();
             usuario.Nombre = Nombre;

@@ -30,14 +30,14 @@ namespace Vista
 
         }
 
-        private Task<Respuesta<int>> ValidarLogin()
+        private Respuesta<int> ValidarLogin()
         {
             return new DaoAdminUsuario().ValidarLogin(textBox1.Text, textBox2.Text);
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            Task<Respuesta<int>> task = await new Task<Task<Respuesta<int>>>(ValidarLogin);
+            Task<Respuesta<int>> task = new Task<Respuesta<int>>(ValidarLogin);
             task.Start();
             var respuestavalidacion = await task;
             if (respuestavalidacion.Estado == EstadosDeRespuesta.Correcto)

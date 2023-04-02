@@ -14,6 +14,7 @@ namespace Controlador
 {
     public class AdminUsuarioController
     {
+        /*
         private AccesoBD db;
 
         public AdminUsuarioController()
@@ -24,16 +25,9 @@ namespace Controlador
         {
             this.db = db;
         }
+        */
         public List<Tbl_Adm_Usuario> ObtenerUsuarios()
         {
-            
-
-
-
-
-
-
-
                 List<Tbl_Adm_Usuario> Usuarios = new List<Tbl_Adm_Usuario>();
             using (SqlConnection conn = new SqlConnection(ConexionBD.cadena_conexion))
             {
@@ -76,10 +70,10 @@ namespace Controlador
 
 
 
-        public async Task<Respuesta<int>> ValidarUsuarioLogin(Tbl_Adm_Usuario usuario)
+        public Respuesta<int> ValidarUsuarioLogin(Tbl_Adm_Usuario usuario)
         {
 
-            await Task.Delay(100); 
+            //await Task.Delay(100); 
             var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
 
 
