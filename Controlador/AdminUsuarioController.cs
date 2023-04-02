@@ -79,6 +79,7 @@ namespace Controlador
         public async Task<Respuesta<int>> ValidarUsuarioLogin(Tbl_Adm_Usuario usuario)
         {
 
+            await Task.Delay(100); 
             var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
 
 

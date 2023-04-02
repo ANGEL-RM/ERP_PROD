@@ -114,10 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUsuarioController.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ConexionBD.cs" />
     <Compile Include="Encrypt.cs" />
-    <Compile Include="Encrypt2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
