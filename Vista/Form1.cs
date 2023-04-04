@@ -1,11 +1,15 @@
-﻿using Modelo;
+﻿
+using log4net.Core;
+using Modelo;
 using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,18 +41,25 @@ namespace Vista
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            Task<Respuesta<int>> task = new Task<Respuesta<int>>(ValidarLogin);
-            task.Start();
-            var respuestavalidacion = await task;
+            messageInfo.Text = "";
+            Task<Respuesta<int>> taskValidarLogin = new Task<Respuesta<int>>(ValidarLogin);
+            taskValidarLogin.Start();
+            Respuesta<int> respuestavalidacion = await taskValidarLogin;
             if (respuestavalidacion.Estado == EstadosDeRespuesta.Correcto)
             {
-                if (!respuestavalidacion.Datos.Equals(2))
-                {
-                    MessageBox.Show("No valido");
-                }
-                else{
-                    MessageBox.Show("exitoso");
-                }
+                Principal FormPrincipal = new Principal();
+                FormPrincipal.Show();
+                this.Hide();
+            }
+            else if(respuestavalidacion.Estado == EstadosDeRespuesta.NoProceso)
+            {
+                messageInfo.Text = respuestavalidacion.Mensaje;
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(@"C:\_MyTest\log.txt", true);//set the log path
+                sw.WriteLine($"Error Message:({respuestavalidacion.Mensaje}\t)");//error message
+                sw.Close();
             }
             //string passWord = Encrypt.GetSHA256(textBox2.Text.Trim());
         }

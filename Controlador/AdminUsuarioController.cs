@@ -7,25 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Modelo.ACCESOBD;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
+
 
 namespace Controlador
 {
     public class AdminUsuarioController
     {
-        /*
-        private AccesoBD db;
 
-        public AdminUsuarioController()
-        {
-        }
-
-        public AdminUsuarioController(AccesoBD db)
-        {
-            this.db = db;
-        }
-        */
+        private AccesoBD db = new AccesoBD();
         public List<Tbl_Adm_Usuario> ObtenerUsuarios()
         {
                 List<Tbl_Adm_Usuario> Usuarios = new List<Tbl_Adm_Usuario>();
@@ -63,6 +54,7 @@ namespace Controlador
                 catch (Exception ex)
                 {
                     Usuarios = new List<Tbl_Adm_Usuario>();
+                    throw ex;
                 }
             }
             return Usuarios;
@@ -70,22 +62,23 @@ namespace Controlador
 
 
 
-        public Respuesta<int> ValidarUsuarioLogin(Tbl_Adm_Usuario usuario)
+        public Respuesta<int> ValidarUsuarioLogin(String Nombre, String Password)
         {
-
-            //await Task.Delay(100); 
-            var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
-
-
-            if (respuesta.Estado == EstadosDeRespuesta.Correcto)
-            {
-
-            }
-        
-            //Tbl_Adm_Usuario usuarioBd = await db.Tbl_Adm_Usuarios.FirstOrDefaultAsync(f => f.Nombre.Equals(usuario.Nombre));
-
-            //List<Tbl_Adm_Usuario> Usuarios = new List<Tbl_Adm_Usuario>();
-            
+                var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
+                try
+                {   
+                    Tbl_Adm_Usuario usuarios = db.Tbl_Adm_Usuarios.FirstOrDefault(U => U.Nombre.Equals(Nombre) && U.Password.Equals(Password));
+                    if (usuarios == null)
+                    {
+                        respuesta.Estado = EstadosDeRespuesta.NoProceso;
+                        respuesta.Mensaje = "Usuario o Contraseña Incorrecto";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    respuesta.Estado = EstadosDeRespuesta.Error;
+                    respuesta.Mensaje = ex.Message.ToString();
+                }
             return respuesta;
         }
     }
