@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Modelo.ACCESOBD;
 using Microsoft.Extensions.Configuration;
-
-
+using System.Diagnostics;
 
 namespace Controlador
 {
@@ -17,7 +16,9 @@ namespace Controlador
     {
 
         private AccesoBD db = new AccesoBD();
-        public List<Tbl_Adm_Usuario> ObtenerUsuarios()
+
+        private LogRegister EscribirLog = new LogRegister();
+        /*public List<Tbl_Adm_Usuario> ObtenerUsuarios()
         {
                 List<Tbl_Adm_Usuario> Usuarios = new List<Tbl_Adm_Usuario>();
             using (SqlConnection conn = new SqlConnection(ConexionBD.cadena_conexion))
@@ -58,16 +59,18 @@ namespace Controlador
                 }
             }
             return Usuarios;
-        }
+        }*/
 
 
 
         public Respuesta<int> ValidarUsuarioLogin(String Nombre, String Password)
         {
-                var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
+            StackFrame stackFrame = new StackFrame(0);
+            EscribirLog.LogWriteProcesos(typeof(AdminUsuarioController).Name, stackFrame.GetMethod().Name);
+            var respuesta = new Respuesta<int> { Estado = EstadosDeRespuesta.Correcto };
                 try
-                {   
-                    Tbl_Adm_Usuario usuarios = db.Tbl_Adm_Usuarios.FirstOrDefault(U => U.Nombre.Equals(Nombre) && U.Password.Equals(Password));
+                {
+                Tbl_Adm_Usuario usuarios = db.Tbl_Adm_Usuarios.FirstOrDefault(U => U.Nombre.Equals(Nombre) && U.Password.Equals(Password));
                     if (usuarios == null)
                     {
                         respuesta.Estado = EstadosDeRespuesta.NoProceso;
@@ -78,7 +81,8 @@ namespace Controlador
                 {
                     respuesta.Estado = EstadosDeRespuesta.Error;
                     respuesta.Mensaje = ex.Message.ToString();
-                }
+                    EscribirLog.LogWriteProcesosError(typeof(AdminUsuarioController).Name, stackFrame.GetMethod().Name, ex.Message.ToString());
+            }
             return respuesta;
         }
     }

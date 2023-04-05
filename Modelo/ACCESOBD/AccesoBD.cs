@@ -12,10 +12,11 @@ namespace Modelo.ACCESOBD
 {
     public class AccesoBD: DbContext
     {
-        public AccesoBD() : base("workstation id=PRODERP.mssql.somee.com;packet size=4096;user id=ARM;pwd=12345678;data source=PRODERP.mssql.somee.com;persist security info=False;initial catalog=PRODERP")
+        public AccesoBD() : base(ConfigurationManager.ConnectionStrings["cadena_conexion_Somee"].ToString())
         {
-            if (!Database.Exists("workstation id=PRODERP.mssql.somee.com;packet size=4096;user id=ARM;pwd=12345678;data source=PRODERP.mssql.somee.com;persist security info=False;initial catalog=PRODERP"))
+            if (!Database.Exists(ConfigurationManager.ConnectionStrings["cadena_conexion_Somee"].ToString()))
             {
+                Console.WriteLine(DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " Inicialización de BD");
                 Database.SetInitializer(new DropCreateDatabaseAlways<AccesoBD>());
             }
         }
