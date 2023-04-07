@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Modelo
 {
-    public class Tbl_Adm_Usuario
+    public class Tbl_Adm_Usuarios
     {
         [Key]
-        public int UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public string Password { get; set; }
         public string Nombre { get; set; }
         public string ApellidoP { get; set; }

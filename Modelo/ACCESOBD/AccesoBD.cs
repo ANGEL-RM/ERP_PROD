@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using Modelo.Usuarios;
 
 namespace Modelo.ACCESOBD
 {
@@ -21,7 +22,8 @@ namespace Modelo.ACCESOBD
             }
         }
 
-        public virtual DbSet<Tbl_Adm_Usuario> Tbl_Adm_Usuarios { get; set; }
-    
+        public virtual DbSet<Tbl_Adm_Usuarios> Tbl_Adm_Usuarios { get; set; }
+        public virtual DbSet<Tbl_Adm_Accesos> Tbl_Adm_Accesos { get; set; }
+        public virtual DbSet<Tbl_Adm_Rol_Acceso> Tbl_Adm_Rol_Acceso { get; set; }
     }
 }

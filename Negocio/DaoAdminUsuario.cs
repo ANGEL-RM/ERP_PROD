@@ -1,5 +1,6 @@
 ﻿using Controlador;
 using Modelo;
+using Modelo.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class Principal
+    partial class Loader
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.OLoader = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.OLoader)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // OLoader
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.OLoader.BackgroundImage = global::Vista.Properties.Resources.SpinLoad;
+            this.OLoader.Location = new System.Drawing.Point(125, 26);
+            this.OLoader.Name = "OLoader";
+            this.OLoader.Size = new System.Drawing.Size(209, 217);
+            this.OLoader.TabIndex = 0;
+            this.OLoader.TabStop = false;
             // 
-            // Principal
+            // Loader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(495, 295);
+            this.Controls.Add(this.OLoader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Principal";
-            this.Text = "Principal";
-            this.Load += new System.EventHandler(this.Principal_Load);
+            this.Name = "Loader";
+            this.Opacity = 0.6D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Loader";
+            this.Load += new System.EventHandler(this.Loader_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.OLoader)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox OLoader;
     }
 }

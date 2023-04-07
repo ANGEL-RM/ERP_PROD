@@ -148,6 +148,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAccesoController.cs" />
     <Compile Include="AdminUsuarioController.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
