@@ -41,27 +41,44 @@ namespace Vista
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            messageInfo.Text = "";
-            Task<Respuesta<int>> taskValidarLogin = new Task<Respuesta<int>>(ValidarLogin);
-            taskValidarLogin.Start();
-            Respuesta<int> respuestavalidacion = await taskValidarLogin;
-            if (respuestavalidacion.Estado == EstadosDeRespuesta.Correcto)
+            if (!textBox1.Text.Equals("") && textBox1.Text != null && !textBox2.Text.Equals("") && textBox2.Text != null)
             {
-                Principal FormPrincipal = new Principal();
-                FormPrincipal.Show();
-                this.Hide();
-            }
-            else if(respuestavalidacion.Estado == EstadosDeRespuesta.NoProceso)
-            {
-                messageInfo.Text = respuestavalidacion.Mensaje;
+                messageInfo.Text = "";
+                Task<Respuesta<int>> taskValidarLogin = new Task<Respuesta<int>>(ValidarLogin);
+                taskValidarLogin.Start();
+                Respuesta<int> respuestavalidacion = await taskValidarLogin;
+                if (respuestavalidacion.Estado == EstadosDeRespuesta.Correcto)
+                {
+                    Principal FormPrincipal = new Principal();
+                    FormPrincipal.Show();
+                    this.Hide();
+                }
+                else if (respuestavalidacion.Estado == EstadosDeRespuesta.NoProceso)
+                {
+                    messageInfo.Text = respuestavalidacion.Mensaje;
+                }
+                else
+                {
+                    StreamWriter sw = new StreamWriter(@"C:\_MyTest\log.txt", true);//set the log path
+                    sw.WriteLine($"Error Message:({respuestavalidacion.Mensaje}\t)");//error message
+                    sw.Close();
+                }
+                //string passWord = Encrypt.GetSHA256(textBox2.Text.Trim());
             }
             else
             {
-                StreamWriter sw = new StreamWriter(@"C:\_MyTest\log.txt", true);//set the log path
-                sw.WriteLine($"Error Message:({respuestavalidacion.Mensaje}\t)");//error message
-                sw.Close();
+                
+                textBox1.Focus();
+                //return false;
+                //
+                //textBox1.Select(0, textBox1.Text.Length);
+                //errorProvider1.SetError(textBox1, "Debe introducir el nombre");
             }
-            //string passWord = Encrypt.GetSHA256(textBox2.Text.Trim());
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

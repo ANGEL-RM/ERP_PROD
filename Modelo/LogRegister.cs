@@ -13,7 +13,9 @@ namespace Modelo
         {
             try
             {
-                FileStream fs = new FileStream(@AppDomain.CurrentDomain.BaseDirectory +
+                String ruta = Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "RegisterLogs\\");
+                CreateIfMissing(ruta);
+                FileStream fs = new FileStream(ruta +
                     "LogExitosos.log", FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter m_streamWriter = new StreamWriter(fs);
                 m_streamWriter.BaseStream.Seek(0, SeekOrigin.End);
@@ -31,7 +33,10 @@ namespace Modelo
         {
             try
             {
-                FileStream fs = new FileStream(@AppDomain.CurrentDomain.BaseDirectory +
+
+                String ruta = Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "RegisterLogs\\");
+                CreateIfMissing(ruta);
+                FileStream fs = new FileStream(ruta +
                     "LogError.log", FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter m_streamWriter = new StreamWriter(fs);
                 m_streamWriter.BaseStream.Seek(0, SeekOrigin.End);
@@ -49,7 +54,7 @@ namespace Modelo
         {
             try
             {
-                String ruta = Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "RegisterLogs"+"\\");
+                String ruta = Path.Combine(@AppDomain.CurrentDomain.BaseDirectory, "RegisterLogs\\");
                 CreateIfMissing(ruta);
                 FileStream fs = new FileStream(ruta +
                     "Log.log", FileMode.OpenOrCreate, FileAccess.Write);
